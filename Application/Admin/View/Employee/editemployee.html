@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html xmlns="http://www.w3.org/1999/xhtml" class="ie8 wp-toolbar"  lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 8) ]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" class="wp-toolbar"  lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>员工管理 - __WEBNAME__</title>
+<link rel='stylesheet' href='__PUBLIC__/css/load-styles.css' type='text/css' media='all' />
+</head>
+<body class="wp-admin wp-core-ui no-js  users-php admin-bar branch-4-2 version-4-2-2 admin-color-midnight locale-zh-cn no-customize-support no-svg">
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body class="wp-admin wp-core-ui no-js  users-php admin-bar branch-4-2 version-4-2-2 admin-color-midnight locale-zh-cn no-customize-support no-svg">
+<script type="text/javascript">
+	document.body.className = document.body.className.replace('no-js','js');
+</script>
+
+	<script type="text/javascript">
+		(function() {
+			var request, b = document.body, c = 'className', cs = 'customize-support', rcs = new RegExp('(^|\\s+)(no-)?'+cs+'(\\s+|$)');
+
+			request = true;
+
+			b[c] = b[c].replace( rcs, ' ' );
+			b[c] += ( window.postMessage && request ? ' ' : ' no-' ) + cs;
+		}());
+	</script>
+	
+<div id="wpwrap">
+
+<include file="Public:left_menu" />
+
+<div id="wpcontent">
+
+<include file="Public:top_menu" />
+		
+<div id="wpbody" role="main">
+
+<div id="wpbody-content" aria-label="主内容" tabindex="0">
+		<div id="screen-meta" class="metabox-prefs">
+				</div>
+				
+<div class="wrap">
+<h2 id="add-new-user"> 员工资料</h2>
+
+
+<div id="ajax-response"></div>
+
+<p>编辑员工资料，灰色为不可修改。</p>
+<form method="post" name="createuser" id="createuser" class="validate" novalidate>
+<input type="hidden" name="http_referer" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" />
+<table class="form-table">
+	<tr class="form-field">
+		<th scope="row"><label for="e_name">姓名</label></th>
+		<td><input name="e_name" type="text" id="e_name" value="{$employee.user_name}" disabled="disabled" /></td>
+	</tr>
+	<tr class="form-field">
+	  <th scope="row"><label for="login_name">用户名</label></th>
+	  <td><input name="login_name" type="text" id="login_name" value="{$employee.user_login}" disabled="disabled" /></td>
+	  </tr>
+	<tr class="form-field">
+		<th scope="row"><label for="group_id">所属组</label></th>
+		<td>
+        <select name="group_id" id="group_id">
+        <volist name="groups" id="vo1">
+        <eq name="vo1.gid" value="$employee.group_id">
+            <option value='{$vo1.gid}' selected>{$vo1.title}</option>
+        <else/>
+            <option value='{$vo1.gid}'>{$vo1.title}</option>
+        </eq>
+        </volist>
+		</select></td>
+	</tr>
+    <tr class="form-field">
+		<th scope="row">状态</th>
+		<td><select name="status" id="status">
+        <if condition="$employee.status eq '正常'"><option value='正常' selected>正常</option>
+        <option value='锁定'>锁定</option>
+        <else />
+        <option value='正常'>正常</option>
+        <option value='锁定' selected>锁定</option>
+        </if>
+		  </select></td>
+	</tr>
+	<tr class="form-field">
+	  <th scope="row"><label for="identity_id">密码</label></th>
+	  <td><input name="user_pass" type="text" id="user_pass" /></td>
+	  </tr>
+	</table>
+
+
+<p class="submit"><input type="submit" name="createuser" id="createusersub" class="button button-primary" value="更新信息"  /></p>
+</form>
+</div>
+
+<div class="clear"></div></div><!-- wpbody-content -->
+<div class="clear"></div></div><!-- wpbody -->
+<div class="clear"></div></div><!-- wpcontent -->
+
+<include file="Public:footer" />
+
+	<div id="wp-auth-check-wrap" class="hidden">
+	<div id="wp-auth-check-bg"></div>
+	</div>
+	
+<script type='text/javascript'>
+/* <![CDATA[ */
+var commonL10n = {"warnDelete":"\u60a8\u5c06\u6c38\u4e45\u5220\u9664\u6240\u9009\u9879\u76ee\u3002\n\u70b9\u51fb\u201c\u53d6\u6d88\u201d\u505c\u6b62\uff0c\u70b9\u51fb\u201c\u786e\u5b9a\u201d\u5220\u9664\u3002","dismiss":"\u5ffd\u7565\u6b64\u901a\u77e5\u3002"};var heartbeatSettings = {"nonce":"2f0e584758"};var authcheckL10n = {"beforeunload":"\u60a8\u7684\u767b\u5f55\u4f1a\u8bdd\u5df2\u8fc7\u671f\uff0c\u8bf7\u91cd\u65b0\u767b\u5f55\u3002","interval":"180"};/* ]]> */
+</script>
+<script type='text/javascript' src='__PUBLIC__/js/load-scripts3.js'></script>
+
+<div class="clear"></div></div><!-- wpwrap -->
+<script type="text/javascript">if(typeof wpOnload=='function')wpOnload();</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<?php
+namespace Home\Controller;
+use Think\Controller;
+class IndexController extends Controller {
+    public function index(){
+		//重定向到New模块的Category操作
+		$this->redirect('/Admin/login', array('cate_id' => 2), 1, '请先登录...');
+    }
+}

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html xmlns="http://www.w3.org/1999/xhtml" class="ie8 wp-toolbar"  lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 8) ]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" class="wp-toolbar"  lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>患者列表 - __WEBNAME__</title>
+<script type="text/javascript">
+addLoadEvent = function(func){if(typeof jQuery!="undefined")jQuery(document).ready(func);else if(typeof wpOnload!='function'){wpOnload=func;}else{var oldonload=wpOnload;wpOnload=function(){oldonload();func();}}};
+var ajaxurl = '/test/wp-admin/admin-ajax.php',
+	pagenow = 'users',
+	typenow = '',
+	adminpage = 'users-php',
+	thousandsSeparator = ',',
+	decimalPoint = '.',
+	isRtl = 0;
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' href='__PUBLIC__/css/load-styles.css' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='//fonts.useso.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&#038;subset=latin%2Clatin-ext&#038;ver=4.2.2' type='text/css' media='all' />
+<!--[if lte IE 7]>
+<link rel='stylesheet' id='ie-css'  href='__PUBLIC__/css/ie.min.css' type='text/css' media='all' />
+<![endif]-->		
+<script type='text/javascript'>
+/* <![CDATA[ */
+var userSettings = {"url":"\/test\/","uid":"1","time":"1435128498","secure":""};/* ]]> */
+</script>
+<script type='text/javascript' src='__PUBLIC__/js/load-scripts.js'></script>
+<script type="text/javascript">var _wpColorScheme = {"icons":{"base":"#999","focus":"#00a0d2","current":"#fff"}};</script>
+	<script>
+		if ( window.history.replaceState ) {
+			window.history.replaceState( null, null, document.getElementById( 'wp-admin-canonical' ).href + window.location.hash );
+		}
+	</script>
+<style type="text/css" media="print">#wpadminbar { display:none; }</style>
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ajax.js"></script>
+</head>
+<body class="wp-admin wp-core-ui no-js  users-php admin-bar branch-4-2 version-4-2-2 admin-color-midnight locale-zh-cn no-customize-support no-svg">
+<script type="text/javascript">
+	document.body.className = document.body.className.replace('no-js','js');
+</script>
+
+	<script type="text/javascript">
+		(function() {
+			var request, b = document.body, c = 'className', cs = 'customize-support', rcs = new RegExp('(^|\\s+)(no-)?'+cs+'(\\s+|$)');
+
+			request = true;
+
+			b[c] = b[c].replace( rcs, ' ' );
+			b[c] += ( window.postMessage && request ? ' ' : ' no-' ) + cs;
+		}());
+	</script>
+<script type="text/javascript">
+//更新回访结果
+var ajax_url_update_visit="{:U('Ajax/updateVisit')}";
+</script>
+<div id="wpwrap">
+
+<include file="Public:left_menu" />
+
+<div id="wpcontent">
+
+<include file="Public:top_menu" />
+		
+<div id="wpbody" role="main">
+
+<div id="wpbody-content" aria-label="主内容" tabindex="0">
+		<div id="screen-meta" class="metabox-prefs">
+				<div id="screen-options-wrap" class="hidden" tabindex="-1" aria-label="“显示选项”选项卡">
+		<form id="adv-settings" method="get" action="{:U('index')}">
+					<h5>请输入查询条件</h5>
+					<div class="metabox-prefs">
+<table class="form-table">
+    <tr class="form-field">
+      <th scope="row" style="padding-top:5px;padding-bottom:5px;text-align:right;"><label for="add_time">提交时间</label></th>
+      <td style="padding-top:5px;padding-bottom:5px;">从 <input name="add_time1" type="date" id="add_time1" value="" style="width:auto;" /> 至 <input name="add_time2" type="date" id="add_time2" value="" style="width:auto;" /></td>
+    </tr>
+      <tr class="form-field">
+	  <th scope="row" style="padding-top:5px;padding-bottom:5px;text-align:right;"><label for="filter_address">筛查地址</label></th>
+	  <td style="padding-top:5px;padding-bottom:5px;"><input name="filter_address" type="text" id="filter_address" style="width:355px;" /></td>
+	  </tr>
+      <tr class="form-field">
+	  <th scope="row" style="padding-top:5px;padding-bottom:5px;text-align:right;"><label for="c_name">患者姓名</label></th>
+	  <td style="padding-top:5px;padding-bottom:5px;"><input name="c_name" type="text" id="c_name" style="width:355px;" /></td>
+	  </tr>
+      <tr class="form-field">
+	  <th scope="row" style="padding-top:5px;padding-bottom:5px;text-align:right;"><label for="tel">联系电话</label></th>
+	  <td style="padding-top:5px;padding-bottom:5px;"><input name="tel" type="text" id="tel" style="width:355px;" /></td>
+	  </tr>
+      <tr class="form-field">
+		<th scope="row" style="padding-top:5px;padding-bottom:5px;text-align:right;"><label for="input_employee">报备人</label></th>
+		<td style="padding-top:5px;padding-bottom:5px;"><input name="input_employee" type="text" id="input_employee" style="width:355px;" /></td>
+      </tr>
+	</table>
+<p class="submit" style="text-align:center;">
+<input name="adv" type="hidden" value="search">
+<input type="submit" name="createuser" id="createusersub" class="button button-primary" value="搜索"  /></p>
+			</div>
+		</form>
+		</div>
+				</div>
+                
+                <div id="screen-meta-links">
+					<div id="screen-options-link-wrap" class="hide-if-no-js screen-meta-toggle">
+			<a href="#screen-options-wrap" id="show-settings-link" class="show-settings" aria-controls="screen-options-wrap" aria-expanded="false">高级搜索</a>
+			</div>
+				</div>
+				
+<div class="wrap">
+<h2>
+患者	<a href="{:U('Filter/add')}" class="add-new-h2">添加患者</a>
+</h2>
+
+<ul class='subsubsub'>
+    <li class='all'>术检人数：<span class="count">{$count}</span> 人　　</li>
+    <li class='all'>职工医保：<span class="count">{$zhigong_count}</span> 人　　</li>
+    <li class='all'>合作医保：<span class="count">{$hezuo_count}</span> 人　　</li>
+</ul>
+<form method="get" action="{:U('index')}">
+	<div class="tablenav top">
+	<div class="alignleft actions" style="display:none;">
+				<label class="screen-reader-text" for="new_role">将角色变更为&hellip;</label>
+		<select name="new_role" id="new_role">
+			<option value="">将角色变更为&hellip;</option>
+			
+	<option value='subscriber'>订阅者</option>
+	<option value='contributor'>投稿者</option>
+	<option value='author'>作者</option>
+	<option value='editor'>编辑</option>
+	<option value='administrator'>管理员</option>		</select>
+	<input type="submit" name="changeit" id="changeit" class="button" value="更改"  /></div><div class='tablenav-pages'>{$page}</div>
+
+		<br class="clear" />
+	</div>
+<table class="wp-list-table widefat fixed striped users">
+	<thead>
+	<tr>
+        <th scope='col' class='manage-column column-uname'>姓名</th>
+        <th scope='col' class='manage-column column-sex'>性别</th>
+        <th scope='col' class='manage-column column-age'>年龄</th>
+        <th scope='col' class='manage-column column-eyes'>右眼</th>
+        <th scope='col' class='manage-column column-eyes'>左眼</th>
+        <th scope='col' class='manage-column column-eye-detail'>眼部情况</th>
+        <th scope='col' class='manage-column column-telnum'>联系电话</th>
+        <th scope='col' class='manage-column column-insurance'>有无医保</th>
+        <th scope='col' class='manage-column column-ctime'>提交时间</th>
+        <th scope='col' class='manage-column column-cdate'>预约日期</th>
+        <th scope='col' class='manage-column column-ctime'>就诊时间</th>
+        <th scope='col' class='manage-column column-address'>筛查地址</th>
+        <th scope='col' class='manage-column column-baobeiren'>报备人</th>
+        <th scope='col' class='manage-column column-huifangjg'>回访结果</th>
+    </tr>
+    </thead>
+
+	<tbody id="the-list" data-wp-lists='list:user'>
+    
+<volist name="clist" id="vo1">
+	<tr id='user-{$vo1.cid}'>
+    <td class="ctext-left"><strong><a href="{:U('Index/view')}?id={$vo1.cid}" target="_blank">{$vo1.c_name}</a></strong></td>
+    <td class="ctext-middle">
+    <if condition="$vo1.sex eq 1">
+    男
+    <elseif condition="$vo1.sex eq 2"/>
+    女
+    <else />
+    &nbsp;
+    </if>
+    </td>
+    <td class="ctext-middle">{$vo1.age}</td>
+    <td class="ctext-left">{$vo1.right_eye}</td>
+    <td class="ctext-left">{$vo1.left_eye}</td>
+    <td class="ctext-left">{$vo1.detail}</td>
+    <td class="ctext-left">{$vo1.tel}</td>
+    <td class="ctext-middle">{$vo1.insurance}</td>
+    <td class="ctext-left">{$vo1.add_time}</td>
+    <td class="ctext-left">{$vo1.appoint_date}</td>
+    <td class="ctext-left">
+    <if condition="$vo1.visit_time eq '0000-00-00 00:00:00'">
+    0000-00-00 00:00:00
+    <else />
+    <span style="color:#F00">{$vo1.visit_time}</span>
+    </if>
+    </td>
+    <td class="ctext-left">{$vo1.filter_address}</td>
+    <td class="ctext-left">{$vo1.input_employee_name}</td>
+    <td class="ctext-left" id="chkv{$vo1.cid}" onclick="checkrvNote(this,{$vo1.cid})">{$vo1.return_visit}</td>
+    </tr>
+</volist>
+    
+    </tbody>
+	<tfoot>
+    <tr>
+        <th scope='col' class='manage-column column-uname'>姓名</th>
+        <th scope='col' class='manage-column column-sex'>性别</th>
+        <th scope='col' class='manage-column column-age'>年龄</th>
+        <th scope='col' class='manage-column column-eyes'>右眼</th>
+        <th scope='col' class='manage-column column-eyes'>左眼</th>
+        <th scope='col' class='manage-column column-eye-detail'>眼部情况</th>
+        <th scope='col' class='manage-column column-telnum'>联系电话</th>
+        <th scope='col' class='manage-column column-insurance'>有无医保</th>
+        <th scope='col' class='manage-column column-ctime'>提交时间</th>
+        <th scope='col' class='manage-column column-cdate'>预约日期</th>
+        <th scope='col' class='manage-column column-ctime'>就诊时间</th>
+        <th scope='col' class='manage-column column-address'>筛查地址</th>
+        <th scope='col' class='manage-column column-baobeiren'>报备人</th>
+        <th scope='col' class='manage-column column-huifangjg'>回访结果</th>
+    </tr>
+    </tfoot>
+
+</table>
+	<div class="tablenav bottom">
+
+		<div class="alignleft actions" style="display:none;">
+				<label class="screen-reader-text" for="new_role">将角色变更为&hellip;</label>
+		<select name="new_role" id="new_role">
+			<option value="">将角色变更为&hellip;</option>
+			
+	<option value='subscriber'>订阅者</option>
+	<option value='contributor'>投稿者</option>
+	<option value='author'>作者</option>
+	<option value='editor'>编辑</option>
+	<option value='administrator'>管理员</option>		</select>
+	<input type="submit" name="changeit" id="changeit" class="button" value="更改"  /></div>
+<div class='tablenav-pages'>{$page}</div>
+		<br class="clear" />
+	</div>
+</form>
+
+<br class="clear" /><input type="button" onclick="window.open('{:U('Xsl/daochu_filter')}?adv={$all['adv']}&add_time1={$all['add_time1']}&add_time2={$all['add_time2']}&filter_address={$all['filter_address']}&c_name={$all['c_name']}&tel={$all['tel']}&input_employee={$all['input_employee']}')" value="导出">
+</div>
+
+<div class="clear"></div></div><!-- wpbody-content -->
+<div class="clear"></div></div><!-- wpbody -->
+<div class="clear"></div></div><!-- wpcontent -->
+
+<include file="Public:footer" />
+
+	<div id="wp-auth-check-wrap" class="hidden">
+	<div id="wp-auth-check-bg"></div>
+	</div>
+	
+<script type='text/javascript'>
+/* <![CDATA[ */
+var commonL10n = {"warnDelete":"\u60a8\u5c06\u6c38\u4e45\u5220\u9664\u6240\u9009\u9879\u76ee\u3002\n\u70b9\u51fb\u201c\u53d6\u6d88\u201d\u505c\u6b62\uff0c\u70b9\u51fb\u201c\u786e\u5b9a\u201d\u5220\u9664\u3002","dismiss":"\u5ffd\u7565\u6b64\u901a\u77e5\u3002"};var heartbeatSettings = {"nonce":"2f0e584758"};var authcheckL10n = {"beforeunload":"\u60a8\u7684\u767b\u5f55\u4f1a\u8bdd\u5df2\u8fc7\u671f\uff0c\u8bf7\u91cd\u65b0\u767b\u5f55\u3002","interval":"180"};/* ]]> */
+</script>
+<script type='text/javascript' src='__PUBLIC__/js/load-scripts2.js'></script>
+
+<div class="clear"></div></div><!-- wpwrap -->
+<script type="text/javascript">if(typeof wpOnload=='function')wpOnload();</script>
+</body>
+</html>

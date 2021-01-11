@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html xmlns="http://www.w3.org/1999/xhtml" class="ie8 wp-toolbar"  lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 8) ]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" class="wp-toolbar"  lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>转诊医生 - __WEBNAME__</title>
+<link rel='stylesheet' href='__PUBLIC__/css/load-styles.css' type='text/css' media='all' />
+</head>
+<body class="wp-admin wp-core-ui no-js  users-php admin-bar branch-4-2 version-4-2-2 admin-color-midnight locale-zh-cn no-customize-support no-svg">
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body class="wp-admin wp-core-ui no-js  users-php admin-bar branch-4-2 version-4-2-2 admin-color-midnight locale-zh-cn no-customize-support no-svg">
+<script type="text/javascript">
+	document.body.className = document.body.className.replace('no-js','js');
+</script>
+
+	<script type="text/javascript">
+		(function() {
+			var request, b = document.body, c = 'className', cs = 'customize-support', rcs = new RegExp('(^|\\s+)(no-)?'+cs+'(\\s+|$)');
+
+			request = true;
+
+			b[c] = b[c].replace( rcs, ' ' );
+			b[c] += ( window.postMessage && request ? ' ' : ' no-' ) + cs;
+		}());
+	</script>
+	
+<div id="wpwrap">
+
+<include file="Public:left_menu" />
+
+<div id="wpcontent">
+
+<include file="Public:top_menu" />
+		
+<div id="wpbody" role="main">
+
+<div id="wpbody-content" aria-label="主内容" tabindex="0">
+		<div id="screen-meta" class="metabox-prefs">
+				</div>
+				
+<div class="wrap">
+<h2 id="add-new-user"> 新增转诊医生</h2>
+
+<div id="ajax-response"></div>
+<script type="text/javascript">
+$(function(){
+  $(":radio").click(function(){
+	  if('hospital' == $(this).val()) {
+		  $("#area_tr").show();
+		  $("#hospital_tr").hide();
+	  } else if('doctor' == $(this).val()) {
+		  $("#area_tr").hide();
+		  $("#hospital_tr").show();
+	  }
+  });
+ });
+</script>
+
+<p>本页可以新增来源医院或转诊医生。</p>
+<form method="post" name="createuser" id="createuser" class="validate" novalidate>
+<input type="hidden" name="http_referer" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" />
+<table class="form-table">
+    <tr class="form-field">
+		<th scope="row"><label for="d_name">项目类型</label></th>
+		<td><input name="kind" type="radio" value="hospital" style="width:auto;">医院　<input name="kind" type="radio" style="width:auto;" value="doctor" checked>医生</td>
+	</tr>
+    <tr class="form-field" id="area_tr" style="display:none;">
+		<th scope="row"><label for="parent_id1">所属地区</label></th>
+		<td><select name="parent_id1" id="parent_id1">
+            <option value='' selected>-请选择-</option>
+        <volist name="alist" id="vo1">
+            <option value='{$vo1.area_id}'>{$vo1.area_name}</option>
+        </volist>
+		</select></td>
+	</tr>
+    <tr class="form-field" id="hospital_tr">
+		<th scope="row"><label for="parent_id2">所属医院</label></th>
+		<td><select name="parent_id2" id="parent_id2">
+            <option value='' selected>-请选择-</option>
+        <volist name="hlist" id="vo2">
+            <option value='{$vo2.area_id}'>{$vo2.area_name}</option>
+        </volist>
+		</select></td>
+	</tr>
+    <tr class="form-field form-required">
+		<th scope="row"><label for="title">名称</label></th>
+		<td><input name="title" type="text" id="title" value="" aria-required="true" /></td>
+	</tr>
+	</table>
+
+
+<p class="submit"><input type="submit" name="createuser" id="createusersub" class="button button-primary" value="增加项目"  /></p>
+</form>
+</div>
+
+<div class="clear"></div></div><!-- wpbody-content -->
+<div class="clear"></div></div><!-- wpbody -->
+<div class="clear"></div></div><!-- wpcontent -->
+
+<include file="Public:footer" />
+
+	<div id="wp-auth-check-wrap" class="hidden">
+	<div id="wp-auth-check-bg"></div>
+	</div>
+	
+<script type='text/javascript'>
+/* <![CDATA[ */
+var commonL10n = {"warnDelete":"\u60a8\u5c06\u6c38\u4e45\u5220\u9664\u6240\u9009\u9879\u76ee\u3002\n\u70b9\u51fb\u201c\u53d6\u6d88\u201d\u505c\u6b62\uff0c\u70b9\u51fb\u201c\u786e\u5b9a\u201d\u5220\u9664\u3002","dismiss":"\u5ffd\u7565\u6b64\u901a\u77e5\u3002"};var heartbeatSettings = {"nonce":"2f0e584758"};var authcheckL10n = {"beforeunload":"\u60a8\u7684\u767b\u5f55\u4f1a\u8bdd\u5df2\u8fc7\u671f\uff0c\u8bf7\u91cd\u65b0\u767b\u5f55\u3002","interval":"180"};/* ]]> */
+</script>
+<script type='text/javascript' src='__PUBLIC__/js/load-scripts3.js'></script>
+
+<div class="clear"></div></div><!-- wpwrap -->
+<script type="text/javascript">if(typeof wpOnload=='function')wpOnload();</script>
+</body>
+</html>

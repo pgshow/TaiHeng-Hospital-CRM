@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html xmlns="http://www.w3.org/1999/xhtml" class="ie8 wp-toolbar"  lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 8) ]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" class="wp-toolbar"  lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>编辑客户 - __WEBNAME__</title>
+<link rel='stylesheet' href='__PUBLIC__/css/load-styles.css' type='text/css' media='all' />
+<script type="text/javascript" src="__PUBLIC__/js/ajax.js"></script>
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<script>
+var ajax_url_area="{:U('Ajax/getArea')}";
+var ajax_url_check_tel="{:U('Ajax/checkTel')}";
+var ajax_url_check_identity="{:U('Ajax/checkIdentity')}";
+
+</script>
+</head>
+<body class="wp-admin wp-core-ui no-js  users-php admin-bar branch-4-2 version-4-2-2 admin-color-midnight locale-zh-cn no-customize-support no-svg">
+<script type="text/javascript">
+	document.body.className = document.body.className.replace('no-js','js');
+</script>
+
+	<script type="text/javascript">
+		(function() {
+			var request, b = document.body, c = 'className', cs = 'customize-support', rcs = new RegExp('(^|\\s+)(no-)?'+cs+'(\\s+|$)');
+
+			request = true;
+
+			b[c] = b[c].replace( rcs, ' ' );
+			b[c] += ( window.postMessage && request ? ' ' : ' no-' ) + cs;
+		}());
+	</script>
+	
+<div id="wpwrap">
+
+<include file="Public:left_menu" />
+
+<div id="wpcontent">
+
+<include file="Public:top_menu" />
+		
+<div id="wpbody" role="main">
+
+<div id="wpbody-content" aria-label="主内容" tabindex="0">
+		<div id="screen-meta" class="metabox-prefs">
+				</div>
+				
+<div class="wrap">
+<h2 id="add-new-user"> 编辑新客户</h2>
+
+
+<div id="ajax-response"></div>
+
+<p>编辑客户资料，只有管理以上才有权限。</p>
+<form method="post" name="createuser" id="createuser" class="validate" novalidate>
+<input type="hidden" name="http_referer" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" /><table class="form-table">
+	<tr class="form-field">
+		<th scope="row"><label for="c_name">姓名</label></th>
+		<td><input name="c_name" type="text" id="c_name" value="{$clist.c_name}" /></td>
+	</tr>
+	<tr class="form-field">
+		<th scope="row"><label for="sex">性别</label></th>
+		<td>
+        <if condition="$clist.sex eq 1">
+        <input name="sex" type="radio" style="width:auto;" value="1" checked>男　<input name="sex" type="radio" value="2" style="width:auto;">女</td>
+        <else />
+        <input name="sex" type="radio" style="width:auto;" value="1">男　<input name="sex" type="radio" value="2" style="width:auto;" checked>女</td>
+        </if>
+	</tr>
+	<tr class="form-field">
+		<th scope="row"><label for="age">年龄</label></th>
+		<td><input name="age" type="number" id="age" value="{$clist.age}" /></td>
+	</tr>
+	<tr class="form-field">
+		<th scope="row"><label for="appoint_no">预约号</label></th>
+		<td><input name="appoint_no" type="text" id="appoint_no" value="{$clist.appoint_no}" /></td>
+	</tr>
+    <tr class="form-field">
+		<th scope="row"><label for="tel">联系电话</label></th>
+		<td><input name="tel" type="text" id="tel" value="{$clist.tel}" onblur="checkTel();" /> <span id="telResult"></span></td>
+	</tr>
+    <tr class="form-field">
+		<th scope="row"><label for="appoint_datetime">预约时间</label></th>
+		<td>
+        <input name="appoint_date" type="date" id="appoint_date" value="{$clist.appoint_date}" style="width:auto;" />日
+        <select name="appoint_time" id="appoint_time">
+        <option value="{$clist.appoint_time}" selected>{$clist.appoint_time}</option>
+        <option value="8-9">8- 9</option>
+        <option value="9-10">9-10</option>
+        <option value="10-11">10-11</option>
+        <option value="11-12">11-12</option>
+        <option value="14-15">14-15</option>
+        <option value="15-16">15-16</option>
+        <option value="16-17">16-17</option>
+        <option value="17-18">17-18</option>
+        </select>
+        时
+        </td>
+	</tr>
+	<tr class="form-field">
+		<th scope="row"><label for="identity_id">证件号码</label></th>
+		<td><input name="identity_id" type="text" id="identity_id" value="{$clist.identity_id}" onblur="checkIdentity();" /> <span id="identityResult"></span></td>
+	</tr>
+    <tr class="form-field">
+		<th scope="row"><label for="address">联系地址</label></th>
+		<td><input name="address" type="text" id="address" value="{$clist.address}" /></td>
+	</tr>
+    <tr class="form-field">
+		<th scope="row"><label for="case">病种</label>
+        </th>
+		<td><input name="case" type="text" id="case" value="{$clist.case}" /></td>
+	</tr>
+    <tr class="form-field">
+		<th scope="row"><label for="detail">病情描述</label></th>
+		<td><textarea name="detail" id="detail" style="width:25em">{$clist.detail}</textarea></td>
+	</tr>
+    <tr class="form-field">
+		<th scope="row"><label for="transfer">患者区域</label></th>
+		<td><input name="transfer" type="text" id="transfer" value="{$clist.transfer}" /></td>
+	</tr>
+	<tr class="form-field">
+		<th scope="row"><label for="c_source">患者来源</label></th>
+		<td><select name="c_source" id="c_source">
+        <if condition="$clist.c_source neq '' ">
+		  <option value="{$clist.c_source}" selected>{$clist.c_source}</option>
+        <else />
+          <option value="" selected>-请选择-</option>
+        </if>
+		  <option value='百度推广'>百度推广</option>
+		  <option value='好搜推广'>好搜推广</option>
+		  <option value='搜狗推广'>搜狗推广</option>
+          <option value='医生介绍'>医生介绍</option>
+          <option value='现场筛查'>现场筛查</option>
+		  <option value='官方微信'>官方微信</option>
+          <option value='腾讯QQ'>腾讯QQ</option>
+          <option value='朋友介绍'>朋友介绍</option>
+          <option value='品牌口碑'>品牌口碑</option>
+          <option value='自然优化'>自然优化</option>
+          <option value='网上留言'>网上留言</option>
+          <option value='外推媒体'>外推媒体</option>
+          <option value='商家团购'>商家团购</option>
+          <option value='外网友链'>外网友链</option>
+          <option value='高校巡展'>高校巡展</option>
+          <option value='平面报纸'>平面报纸</option>
+          <option value='平面杂志'>平面杂志</option>
+          <option value='电视媒体'>电视媒体</option>
+          <option value='网络媒体'>网络媒体</option>
+          <option value='户外广告'>户外广告</option>
+          <option value='社区广告'>社区广告</option>
+          <option value='其它渠道'>其它渠道</option>
+		  </select>
+          </td>
+	</tr>
+    <tr class="form-field">
+		<th scope="row"><label for="appoint_way">预约方式</label> <span class="description">(必填)</span></th>
+		<td><select name="appoint_way" id="appoint_way">
+        <if condition="$clist.appoint_way neq '' ">
+		  <option value="{$clist.appoint_way}" selected>{$clist.appoint_way}</option>
+        <else />
+          <option value="" selected>-请选择-</option>
+        </if>
+		  <option value='商务通 baidu'>商务通 baidu</option>
+		  <option value='商务通 haosou'>商务通 haosou</option>
+		  <option value='商务通 sougou'>商务通 sougou</option>
+          <option value='商务通 seo'>商务通 seo</option>
+		  <option value='电话预约'>电话预约</option>
+          <option value='网医转诊'>网医转诊</option>
+          <option value='现场筛查'>现场筛查</option>
+          <option value='QQ预约'>QQ预约</option>
+          <option value='微信预约'>微信预约</option>
+          <option value='网上预约'>网上预约</option>
+          <option value='商桥预约'>商桥预约</option>
+          <option value='短信预约'>短信预约</option>
+          <option value='外网预约'>外网预约</option>
+          <option value='团购预约'>团购预约</option>
+          <option value='留言预约'>留言预约</option>
+          <option value='其它预约'>其它预约</option>
+		  </select></td>
+	</tr>
+    <tr class="form-field">
+		<th scope="row"><label for="appoint_office">预约科室</label></th>
+		<td><select name="appoint_office" id="appoint_office">
+        <if condition="$clist.appoint_office neq '' ">
+		  <option value="{$clist.appoint_office}" selected>{$clist.appoint_office}</option>
+        <else />
+          <option value="" selected>-请选择-</option>
+        </if>
+		  <option value='近视专科'>近视专科</option>
+		  <option value='白内障科'>白内障科</option>
+		  <option value='屈光不正'>屈光不正</option>
+		  <option value='青光眼科'>青光眼科</option>
+		  <option value='斜弱视科'>斜弱视科</option>
+          <option value='眼底病科'>眼底病科</option>
+          <option value='泪道病科'>泪道病科</option>
+          <option value='角膜病科'>角膜病科</option>
+          <option value='眼表病科'>眼表病科</option>
+          <option value='眼眶病科'>眼眶病科</option>
+          <option value='眼外伤科'>眼外伤科</option>
+          <option value='视疲劳科'>视疲劳科</option>
+          <option value='低视力科'>低视力科</option>
+          <option value='医学验配'>医学验配</option>
+          <option value='眼整形科'>眼整形科</option>
+          <option value='综合病科'>综合病科</option>
+          <option value='其它科室'>其它科室</option>
+		  </select></td>
+	</tr>
+    <tr class="form-field">
+		<th scope="row"><label for="appoint_doctor">预约专家</label></th>
+		<td>
+          <select name="appoint_doctor" id="appoint_doctor">
+          <if condition="$clist.appoint_doctor neq '' ">
+          	<option value="{$clist.appoint_doctor}" selected>{$clist.appoint_doctor}</option>
+          <else />
+          <option value="" selected>-请选择-</option>
+          </if>
+          <volist name="dlist" id="vod">
+            <option value='{$vod.doctor_name}'>{$vod.doctor_name}</option>
+          </volist>
+		  </select>
+        </td>
+	</tr>
+	</table>
+
+
+<p class="submit"><input type="submit" name="createuser" id="createusersub" class="button button-primary" value="修改用户"  /></p>
+</form>
+</div>
+
+<div class="clear"></div></div><!-- wpbody-content -->
+<div class="clear"></div></div><!-- wpbody -->
+<div class="clear"></div></div><!-- wpcontent -->
+
+<include file="Public:footer" />
+
+	<div id="wp-auth-check-wrap" class="hidden">
+	<div id="wp-auth-check-bg"></div>
+	</div>
+	
+<script type='text/javascript'>
+/* <![CDATA[ */
+var commonL10n = {"warnDelete":"\u60a8\u5c06\u6c38\u4e45\u5220\u9664\u6240\u9009\u9879\u76ee\u3002\n\u70b9\u51fb\u201c\u53d6\u6d88\u201d\u505c\u6b62\uff0c\u70b9\u51fb\u201c\u786e\u5b9a\u201d\u5220\u9664\u3002","dismiss":"\u5ffd\u7565\u6b64\u901a\u77e5\u3002"};var heartbeatSettings = {"nonce":"2f0e584758"};var authcheckL10n = {"beforeunload":"\u60a8\u7684\u767b\u5f55\u4f1a\u8bdd\u5df2\u8fc7\u671f\uff0c\u8bf7\u91cd\u65b0\u767b\u5f55\u3002","interval":"180"};/* ]]> */
+</script>
+<script type='text/javascript' src='__PUBLIC__/js/load-scripts3.js'></script>
+
+<div class="clear"></div></div><!-- wpwrap -->
+<script type="text/javascript">if(typeof wpOnload=='function')wpOnload();</script>
+</body>
+</html>
